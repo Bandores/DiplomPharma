@@ -1,10 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Изменение данных</title>
+    {{ super() }}
+ <style>
+        .table-container {
+            max-width: 100%; /* Используем 100% ширину родительского контейнера */
+            overflow: auto;
+        }
+
+        .table-auto-size {
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        .table-auto-size th, .table-auto-size td {
+            word-wrap: break-word;
+        }
+    </style>
 </head>
 <body>
-$END$
+<main>
+        {{ super() }}
+        <h1>Update Items</h1>
+        <div class="table-container">
+            <table class="table table-auto-size">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Название</th>
+                        <th scope="col">Цена</th>
+                        <th scope="col">Детали</th>
+                        <th scope="col">Изображение</th>
+                        <th scope="col">Количество</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                        <tr>
+                            <th scope="row">{{ item.id }}</th>
+                            <td>{{ item.title }}</td>
+                            <td>{{ item.price }}</td>
+                            <td>{{ item.details }}</td>
+                            <td>{{ item.img }}</td>
+                            <td>{{ item.total }}</td>
+                            <td>
+                                <a href="{{ url_for('edit', id=item.id) }}">Edit</a>
+                                <a href="{{ url_for('delete', id=item.id) }}">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
 </body>
 </html>

@@ -1,13 +1,12 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
+from flask.cli import FlaskGroup
+from flask_migrate import Migrate, MigrateCommand
+from main import app, db
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///pharma.db'
-db = SQLAlchemy(app)
+cli = FlaskGroup(app)
+
+# Используйте FlaskCommand вместо Manager
 migrate = Migrate(app, db)
+cli.add_command('db', MigrateCommand)
 
-# Ваши модели данных здесь
-
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    cli()

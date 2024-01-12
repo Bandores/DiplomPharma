@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %}
+{% block body %}
+<h1>{{ item.title }}</h1>
+<img class="rounded mx-auto d-block" src="{{ item.img }}" alt="{{ item.title }} Image" height="auto" max-width = "100%" style="display: block; margin-left: auto; margin-right: auto;">
+<span class="border-0">
+    <p>Цена: {{ item.price }} тенге</p>
+    <p>Детали : {{ item.details }}</p>
+</span>
+<button onclick="document.location='/buy/{{ item.id }}'" type="button" class="w-100 btn btn-lg btn-outline-primary">Купить</button>
+{% endblock %}

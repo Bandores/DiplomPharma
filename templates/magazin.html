@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Главная страница
+{% endblock %}
+
+{% block head %}
+    {{ super() }}
+    <style>
+        /* Дополнительные стили для блоков товаров */
+        .col {
+            max-width: 100px; /* Увеличил максимальную ширину блока */
+            flex: 100 100 100px; /* Ограничение ширины блока для Flexbox */
+            margin: 0 10px 10px 0; /* Добавление отступов между блоками и справа внизу */
+            max-height: 300px; /* Увеличил максимальную высоту блока */
+            box-sizing: border-box;
+            background-color: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -20px -20px 0; /* Скомпенсировал отступы между блоками и внизу справа */
+        }
+
+        /* Ваши стили карточек товаров (оставлены для примера) */
+        .card {
+            /* Ваши стили карточек товаров */
+        }
+
+        .card-body {
+            /* Ваши стили для тела карточки товара */
+        }
+
+        .card-header {
+
+        }
+
+        /* Добавлено для стилизации изображения товара */
+        .product-img {
+            max-width: 100%;
+            height: auto;
+             }
+        
+        /* Стили для основного контейнера */
+#leftmenu {
+position: absolute; /* Устанавливаем абсолютное позиционирование для формы */
+    top: -40;/* Размещаем форму в верхнем крае */
+    left: 0; /* Размещаем форму в левом крае */
+    margin: 10px; /* Добавляем отступы для создания промежутка между формой и краем */
+    max-width: 300px; /* Задаем максимальную ширину для блока с формой */
+
+border: 1px solid blue;
+
+}
+    </style>
+{% endblock %}
+
+
+ /* В этом блоке можно будеть сделать боковой меню поиска */
+{% block left %}
+
+{% endblock %}
+
+
+{% block body %}
+
+
+
+<main>
+    {{ super() }}
+
+    <h1>Каталог товаров</h1>
+<div class="row row-cols-4 row-cols-md-4 row-cols-lg-4">
+    {% if data %}
+            {% for item in data %}
+                        <div class="col mb-4">
+            <div class="card rounded-3 shadow-sm">
+                <div class="card-header" style="background-color: white;">
+                    <img class="rounded mx-auto d-block" src="{{ item.img }}" alt="{{ item.title }} Image" width="200px" height="200px" style="display: block; margin-left: auto; margin-right: auto;">
+                </div>
+                <div class="card-body">
+                    <h4 class="my-0 fw-normal">{{ item.title }}</h4>
+                    <h2 class="card-title pricing-card-title">{{ item.price }} тенге<small class="text-body-secondary fw-light"></small></h2>
+                    {% if item.total > 0 %}
+                    <h4>Осталось {{ item.total }} шт</h4>
+                    {% endif %}
+                    <button onclick="document.location='/buy/{{ item.id }}'" type="button" class="w-100 btn btn-lg btn-outline-primary">Купить</button>
+                    <h1></h1>
+                    <button onclick="document.location='/details/{{ item.id }}'" type="button" class="w-100 btn btn-lg btn-outline-primary">Подробнее</button>
+                </div>
+            </div>
+        </div>
+            {% endfor %}
+        {% else %}
+
+                <ul>
+                    <p>По вашему запросу ничего не найдено</p>
+                    <li><h6>Возможно, вы набрали слово с ошибками. Попробуйте упростить запрос или проверьте наличие опечаток.</h6></li>
+                    <li><h6>Подсказка: Попробуйте использовать более общие запросы или английские названия товаров.</h6></li>
+                </ul>
+
+
+        {% endif %}
+</div>
+</main>
+<menu>
+
+</menu>
+
+
+{% endblock %}

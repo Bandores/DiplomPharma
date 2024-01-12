@@ -1,10 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Edit Item</title>
 </head>
 <body>
-$END$
+    <h1>Edit Item</h1>
+    <form method="POST">
+        {{ form.csrf_token }}
+        {{ form.hidden_tag() }}
+        <label for="title">Название:</label>
+        <input type="text" id="title" name="title" value="{{ item.title }}" required>
+
+        <!-- Пример для редактирования поля price -->
+        <label for="price">Цена:</label>
+        <input type="number" id="price" name="price" value="{{ item.price }}" required>
+
+        <label for="title">Детали:</label>
+        <input type="text" id="details" name="details" value="{{ item.details }}" required>
+
+        <!-- Пример для редактирования поля price -->
+        <label for="price">Количество:</label>
+        <input type="number" id="total" name="total" value="{{ item.total }}" required>
+        <label for="title">Изображение:</label>
+        <input type="text" id="img" name="img" value="{{ item.img }}" required>
+
+        <button type="submit">Save Changes</button>
+    </form>
 </body>
 </html>
